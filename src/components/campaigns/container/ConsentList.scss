@@ -1,0 +1,52 @@
+.fieldDisplayListWrap{
+    .react-bootstrap-table{
+        padding-bottom: 35px;
+    }
+}
+
+.react-bootstrap-table{
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.table-bordered thead th{
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+.table{
+    border: 0;
+    table-layout: auto;
+}
+.fieldDisplayList{
+    a{
+        color: gray;
+    }
+    &:hover{
+        color: gold;
+    }
+}
+.table{
+    border: 0;
+    table-layout: auto;
+
+    th,td{
+        padding: 8px 0;
+        vertical-align: auto;
+        .action{
+            color: rgb(35, 34, 34);
+            line-height: 0;
+
+        }
+    }
+    thead{
+        // visibility: hidden;
+        th{
+            padding: 10px;
+            // font-size: 0;
+
+        }
+
+    }
+}
