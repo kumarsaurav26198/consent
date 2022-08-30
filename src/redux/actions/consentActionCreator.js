@@ -2,8 +2,10 @@ import { ActionTypes } from '../constants/actiontypes';
 
 export const fetchConsent = (data = []) => {
   console.warn("Action", ActionTypes.FETCH_CONSENT);
-  return data;
-
+  return {
+    type: ActionTypes.FETCH_CONSENT,
+    data
+  };
 };
 export const deleteConsent = (data = []) => {
   console.warn("Action", ActionTypes.FETCH_CONSENT_LIST_DELETE);

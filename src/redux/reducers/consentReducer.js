@@ -6,7 +6,7 @@ export const consentReducer = (data = [], { type, payload }) => {
     case ActionTypes.FETCH_CONSENT:
       //logic for fetchConsent
       console.warn("Reducers", ActionTypes.FETCH_CONSENT);
-      return [action.data];
+      return 2;
     case ActionTypes.FETCH_CONSENT_LIST_DELETE:
       //logic for delete Consent
 
