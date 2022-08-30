@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
-import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
-
 import SearchBox from "../../common/SearchBox";
-import "./ConsentList.scss";
+import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
+import { useDispatch, useSelector } from 'react-redux';
+import { addConsent, deleteConsent, fetchConsent } from "../../../redux/actions/consentActionCreator";
+import { setProducts } from "../../../redux/actions/productsActions";
+
 
 const ConsentMgrListEditComponent = () => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    fetch(`https://62dbc602d1d97b9e0c53b578.mockapi.io/fakedata`)
-      .then((response) => response.json())
-      .then((actualData) => {
-        setData(actualData);
-      });
-  }, []);
+  const result = useSelector(state => state.reducers.consentList);
+  console.warn("redux store data in consentList", result);
+
+  const dispatch = useDispatch();
+
 
   function priceFormatter(cell, row) {
-    if (cell === "false") {
+    if (cell === "false")
+    {
       return (
         <span>
           <strong style={{ color: "red" }}>{cell}</strong>
@@ -31,11 +31,11 @@ const ConsentMgrListEditComponent = () => {
         </span>
       );
   }
+
   const columns = [
     {
-      // style: (cell, row, rowIndex, colIndex) => {},
-      dataField: "campaignName",
-      text: "Customer Name",
+      dataField: "campaignId",
+      text: "Customer ID",
       sort: true,
       headerAlign: "start",
       align: "start",
@@ -51,12 +51,12 @@ const ConsentMgrListEditComponent = () => {
         );
       },
     },
-
     {
-      dataField: "channel",
-      text: "Channel",
+      dataField: "createdDate",
+      text: "Created Date",
       sort: true,
-      align: "center",
+      headerAlign: "start",
+      align: "start",
       sortCaret: () => {
         return (
           <span>
@@ -70,51 +70,92 @@ const ConsentMgrListEditComponent = () => {
       },
     },
     {
+      dataField: "lastModified",
+      text: "last Modified",
+      sort: true,
+      headerAlign: "start",
+      align: "start",
+      sortCaret: () => {
+        return (
+          <span>
+            &nbsp;
+            <RiArrowUpSFill />
+            <span style={RiArrowDownSFillStyle}>
+              <RiArrowDownSFill />
+            </span>
+          </span>
+        );
+      },
+    },
+    {
+      dataField: "phoneNumber",
+      text: "Phone Number",
+      sort: false,
+      headerAlign: "start",
+      align: "start",
+    },
+    {
       dataField: "consent",
-      text: "Action",
-      align: "center",
+      text: "Consent",
+      sort: false,
+      headerAlign: "end",
+      align: "end",
       formatter: priceFormatter,
     },
+    {
+      dataField: "channel",
+      text: "Consent",
+      sort: false,
+      headerAlign: "end",
+      align: "end",
+    },
+    {
+      dataField: "campaignName",
+      text: "Consent",
+      sort: false,
+      headerAlign: "end",
+      align: "end",
+
+    },
+
   ];
   return (
     <>
-      <div
-        style={{
-          width: "400px",
-          position: "relative",
-          left: "75%",
-        }}
-      >
-        <SearchBox placeholder="search campaigns " />
+      <div className="card-holder">
+        <button onClick={() => dispatch(fetchConsent())}>fetch data</button>
+        <button onClick={() => dispatch(setProducts())}>Set Product</button>
+        <button onClick={() => dispatch(deleteConsent())}>delete data</button>
+        <button onClick={() => dispatch(addConsent())}>add data</button>
       </div>
-      <div
-        style={{
-          width: "90px",
-          position: "absolute",
-          left: "68%",
-          border: "1px solid black  ",
-          height: "50px",
-          borderRadius: "4px",
-          top: "44%",
-        }}
-      >
-        {/* <SearchBox placeholder="search " /> */}
-      </div>
+      <div className="consentMgrtableList" >
+        <div className="d-flex flex-row justify-content-between ml-2 ">
+          <div>
 
-      <div className="fieldDisplayListWrap">
-        <div className="fieldDisplayList tableDisplay">
-          <BootstrapTable
-            keyField="id"
-            data={data}
-            columns={columns}
-            hover
-            condensed
-            pagination={paginationFactory()}
-            sort={{ dataField: "price", order: "asc" }}
-            rowStyle={rowStyle}
-            filter={filterFactory()}
-            noDataIndication="Table is Empty"
-          />
+          </div>
+
+          <div style={{ width: "30rem", paddingRight: "10px" }}>
+            <SearchBox placeholder="Search campaigns  " />
+          </div>
+        </div>
+
+        <div className="fieldDisplayListWrap">
+
+          <div className="fieldDisplayList tableDisplay">
+            <BootstrapTable
+              className=""
+              keyField="id"
+              data={[]}
+              columns={columns}
+              hover
+              condensed
+              sort={{ dataField: "price", order: "asc" }}
+              rowStyle={rowStyle}
+              filter={filterFactory()}
+              pagination={paginationFactory([])}
+              noDataIndication="Table is Empty"
+
+            />
+          </div>
         </div>
       </div>
     </>
@@ -125,7 +166,7 @@ export default ConsentMgrListEditComponent;
 const rowStyle = {
   paddingLeft: "100px",
   marginLeft: "10px",
-  // textAlign: "center",
+  textAlign: "center",
 };
 const RiArrowDownSFillStyle = {
   position: "relative",

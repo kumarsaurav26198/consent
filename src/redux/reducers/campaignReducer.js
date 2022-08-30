@@ -1,7 +1,8 @@
-import { ActionTypes } from "../constants/action-types";
+import { ActionTypes } from "../constants/actiontypes";
 
 export const campaignReducer = (state = [], action) => {
-  switch (action.type) {
+  switch (action.type)
+  {
     case ActionTypes.FETCH_CAMPAGIN_LIST:
       return [...action.response.data];
     case ActionTypes.FETCH_CAMPAGIN_LIST_FAILAURE:
