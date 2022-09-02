@@ -1,95 +1,53 @@
-import React, { useState, useEffect } from "react";
+import React, { } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 import { BsThreeDots } from "react-icons/bs";
+import { GrView } from "react-icons/gr";
 import { useNavigate } from 'react-router-dom';
 import cellEditFactory from 'react-bootstrap-table2-editor';
-import axios from 'axios';
-
-
-
 import SearchBox from "../../common/SearchBox";
 import "./ConsentList.scss";
-import { Button } from "react-bootstrap";
+import { useSelector } from 'react-redux';
+import Button from 'react-bootstrap/Button';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
 
 const ConsentMgrListComponent = () => {
+
+  const consentListData = useSelector(state => state.reducers.consentList);
+  console.warn("redux store data in consentList", consentListData);
+
   const navigate = useNavigate();
-  const [data, setData] = useState([]);
 
-
-
-  useEffect(() => {
-    fetch(`https://62dbc602d1d97b9e0c53b578.mockapi.io/fakedata`)
-      .then((response) => response.json())
-      .then((actualData) => {
-        setData(actualData);
-      });
-  }, []);
-  const updateAPIData = () => {
-    axios.put(`https://62dbc602d1d97b9e0c53b578.mockapi.io/fakedata${ campaignId }`, {
-      campaignName,
-      channel,
-    }).then(() => {
-    });
-  };
-
-  function beforeSaveCell(oldValue, newValue, row, column, done) {
-    setTimeout(() => {
-      if (confirm('Do you want to accep this change?'))
-      {
-        done(true);
-
-      } else
-      {
-        done(false);
-      }
-    }, 0);
-    return { async: true };
-
-  }
-  function afterSaveCell(oldValue, newValue, row, column) {
-    // updateAPIData();
-    // console.warn("updateAPIData");
-
-
-  }
   function priceFormatter(cell, row) {
-    return (
-      // <button type="button" className="btn btn-secondary" data-toggle={
-      //   <BsThreeDots style={{ color: "black" }} />
+    const popover = (
+      <Popover id="popover-basic" className="d-flex flex-column-reverse">
+        <Button variant="Light" onClick={() => { navigate('./consentMgrListEditContainer', { replace: false }); }}>
+          View &nbsp;
+          <GrView style={{ color: "black" }} />
+        </Button>
 
-      // } data-placement="left" title={
-      //   <BsThreeDots style={{ color: "black" }} />
-
-      // }>
-      //   Tooltip on left
-      // </button>
-      <Button style={{ background: "transparent", paddingLeft: "10px", border: "none" }} onClick={() => { navigate('./consentMgrListEditContainer', { replace: true }); }} data-toggle="tooltip" data-placement="left">
-        <BsThreeDots style={{ color: "black" }} />
-      </Button>
+      </Popover>
     );
-    // if (cell === "false")
-    // {
-    //   return (
-    //     <span>
-    //       <strong style={{ color: "red" }}>{cell}</strong>
-    //     </span>
-    //   );
-    // } else
-    //   return (
-    //     <span>
-    //       <strong>{cell}</strong>
-    //     </span>
-    //   );
+    return (
+      <>
+        <OverlayTrigger trigger="click" placement="left" delay={{ show: 150, hide: 150 }} overlay={popover}>
+          <Button variant="Light">
+            <BsThreeDots style={{ color: "black" }} onClick={() => { }} />
+          </Button>
+        </OverlayTrigger>
+      </>
+    );
+
   }
   const columns = [
     {
       dataField: "campaignId",
       text: "Campaign Id",
       editable: false,
-      headerStyle: { width: 800 },
+      headerStyle: { width: "30%" },
       headerAlign: "start",
       sort: true,
     },
@@ -97,7 +55,7 @@ const ConsentMgrListComponent = () => {
       dataField: "campaignName",
       text: "Customer Name",
       sort: true,
-      headerAlign: "start",
+      headerAlign: "center",
       align: "start",
       sortCaret: () => {
         return (
@@ -116,7 +74,7 @@ const ConsentMgrListComponent = () => {
       dataField: "channel",
       text: "Channel",
       sort: true,
-      align: "center",
+      align: "start",
       sortCaret: () => {
         return (
           <span>
@@ -132,8 +90,8 @@ const ConsentMgrListComponent = () => {
     {
       dataField: "consent",
       text: "Action",
-      align: "end",
-      headerAlign: "end",
+      align: "center",
+      headerAlign: "center",
       formatter: priceFormatter,
       editable: false,
       headerStyle: { width: 100 }
@@ -175,7 +133,7 @@ const ConsentMgrListComponent = () => {
           <div className="fieldDisplayList tableDisplay">
             <BootstrapTable
               keyField="campaignId"
-              data={data}
+              data={consentListData}
               columns={columns}
               hover
               condensed
@@ -184,13 +142,6 @@ const ConsentMgrListComponent = () => {
               rowStyle={rowStyle}
               filter={filterFactory()}
               noDataIndication="Table is Empty"
-              cellEdit={cellEditFactory({
-                mode: 'dbclick',
-                beforeSaveCell,
-                afterSaveCell,
-
-              })}
-            // onTableChange={onTableChange}
             />
           </div>
         </div>
