@@ -181,7 +181,7 @@ const AddConsent = () => {
                                 <CInputGroup className='pt-4'>
                                     <CButton onClick={handleClick}>Add New Consent</CButton>
                                     {error && error}
-                                    {/* <CButton onClick={() => dispatch(addConsent())}>Add New Consent</CButton> */}
+                                    <CButton onClick={() => dispatch(addConsent())}>Add New Consent</CButton>
                                 </CInputGroup>
 
                             </CForm>

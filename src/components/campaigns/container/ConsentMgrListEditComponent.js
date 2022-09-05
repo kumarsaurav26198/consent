@@ -5,7 +5,7 @@ import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 import SearchBox from "../../common/SearchBox";
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteConsent } from "../../../redux/actions/consentActionCreator";
+import { deleteConsent, fetchConsent } from "../../../redux/actions/consentActionCreator";
 import { BsThreeDots } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
@@ -17,7 +17,7 @@ import { faEdit, faEye, faPlusCircle, faTrash } from "@fortawesome/free-solid-sv
 
 const ConsentMgrListEditComponent = () => {
 
-  const result = useSelector(state => state.reducers.consentList);
+  // const result = useSelector(state => state.reducers.consentList);
   // console.warn("redux store data in consentList", result);
 
   const dispatch = useDispatch();
@@ -169,12 +169,13 @@ const ConsentMgrListEditComponent = () => {
   ];
   return (
     <>
-      {/* <div className="card-holder">
+      <div className="card-holder">
         <button onClick={() => dispatch(fetchConsent())}>fetch data</button>
         <button onClick={() => dispatch(setProducts())}>Set Product</button>
         <button onClick={() => dispatch(deleteConsent())}>delete data</button>
         <button onClick={() => dispatch(addConsent())}>add data</button>
-      </div> */}
+        <button onClick={() => dispatch(fetchConsent())}>FETCH CONSENT LIST</button>
+      </div>
       <div className="consentMgrtableList" >
         <div className="d-flex flex-row justify-content-between ml-2 ">
           <div>
@@ -191,7 +192,7 @@ const ConsentMgrListEditComponent = () => {
           <div className="fieldDisplayList tableDisplay">
             <BootstrapTable
               keyField="id"
-              data={() => { { result; } }}
+              data={[]}
               columns={columns}
               hover
               condensed

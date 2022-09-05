@@ -16,8 +16,8 @@ import Popover from 'react-bootstrap/Popover';
 
 const ConsentMgrListComponent = () => {
 
-  const consentListData = useSelector(state => state.reducers.consentList);
-  console.warn("redux store data in consentList", consentListData);
+  // const consentListData = useSelector(state => state.reducers.consentList);
+  // console.warn("redux store data in consentList", consentListData);
 
   const navigate = useNavigate();
 
@@ -133,7 +133,7 @@ const ConsentMgrListComponent = () => {
           <div className="fieldDisplayList tableDisplay">
             <BootstrapTable
               keyField="campaignId"
-              data={consentListData}
+              data={[]}
               columns={columns}
               hover
               condensed

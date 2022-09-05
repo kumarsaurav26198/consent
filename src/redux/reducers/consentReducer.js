@@ -1,75 +1,77 @@
 import { ActionTypes } from '../constants/actiontypes';
+
+
 const addListData = [
-  {
-    "phoneNumber": "(596) 931-0168 x70975",
-    "createdDate": "2015-07-26T19:04:39.331Z",
-    "lastModified": "2005-11-18T10:01:37.648Z",
-    "consent": "true",
-    "campaignName": "Francis Reinger",
-    "channel": "input",
-    "campaignId": 72,
-    "id": "1"
-  },
-  {
-    "phoneNumber": "942-594-1951 x17910",
-    "createdDate": "1996-12-29T20:15:17.177Z",
-    "lastModified": "2043-07-31T06:25:01.239Z",
-    "consent": "true",
-    "campaignName": "Hubert Will",
-    "channel": "hack",
-    "campaignId": 95,
-    "id": "2"
-  },
-  {
-    "phoneNumber": "1-595-481-4137 x77016",
-    "createdDate": "2070-06-03T02:47:43.017Z",
-    "lastModified": "2001-08-19T05:06:34.148Z",
-    "consent": "true",
-    "campaignName": "Daryl Reichert",
-    "channel": "parse",
-    "campaignId": 71,
-    "id": "3"
-  },
-  {
-    "phoneNumber": "(676) 227-0147",
-    "createdDate": "2049-09-23T04:33:00.621Z",
-    "lastModified": "1995-09-09T02:43:02.072Z",
-    "consent": "true",
-    "campaignName": "Jenny Mayert",
-    "channel": "hack",
-    "campaignId": 94,
-    "id": "4"
-  },
-  {
-    "phoneNumber": "955.259.9362",
-    "createdDate": "2030-04-25T21:54:30.848Z",
-    "lastModified": "2084-03-02T17:26:22.446Z",
-    "consent": "true",
-    "campaignName": "Miss Hector Kassulke",
-    "channel": "input",
-    "campaignId": 76,
-    "id": "5"
-  },
-  {
-    "phoneNumber": "(605) 415-7027",
-    "createdDate": "2039-10-27T14:35:01.055Z",
-    "lastModified": "2022-02-21T13:06:57.048Z",
-    "consent": "false",
-    "campaignName": "Kate Oberbrunner II",
-    "channel": "input",
-    "campaignId": 90,
-    "id": "6"
-  },
-  {
-    "phoneNumber": "1-563-957-8977 x275",
-    "createdDate": "2030-07-01T23:23:46.375Z",
-    "lastModified": "2051-07-05T19:19:49.081Z",
-    "consent": "false",
-    "campaignName": "Herman McClure",
-    "channel": "navigate",
-    "campaignId": 54,
-    "id": "7"
-  },
+  // {
+  //   "phoneNumber": "(596) 931-0168 x70975",
+  //   "createdDate": "2015-07-26T19:04:39.331Z",
+  //   "lastModified": "2005-11-18T10:01:37.648Z",
+  //   "consent": "true",
+  //   "campaignName": "Francis Reinger",
+  //   "channel": "input",
+  //   "campaignId": 72,
+  //   "id": "1"
+  // },
+  // {
+  //   "phoneNumber": "942-594-1951 x17910",
+  //   "createdDate": "1996-12-29T20:15:17.177Z",
+  //   "lastModified": "2043-07-31T06:25:01.239Z",
+  //   "consent": "true",
+  //   "campaignName": "Hubert Will",
+  //   "channel": "hack",
+  //   "campaignId": 95,
+  //   "id": "2"
+  // },
+  // {
+  //   "phoneNumber": "1-595-481-4137 x77016",
+  //   "createdDate": "2070-06-03T02:47:43.017Z",
+  //   "lastModified": "2001-08-19T05:06:34.148Z",
+  //   "consent": "true",
+  //   "campaignName": "Daryl Reichert",
+  //   "channel": "parse",
+  //   "campaignId": 71,
+  //   "id": "3"
+  // },
+  // {
+  //   "phoneNumber": "(676) 227-0147",
+  //   "createdDate": "2049-09-23T04:33:00.621Z",
+  //   "lastModified": "1995-09-09T02:43:02.072Z",
+  //   "consent": "true",
+  //   "campaignName": "Jenny Mayert",
+  //   "channel": "hack",
+  //   "campaignId": 94,
+  //   "id": "4"
+  // },
+  // {
+  //   "phoneNumber": "955.259.9362",
+  //   "createdDate": "2030-04-25T21:54:30.848Z",
+  //   "lastModified": "2084-03-02T17:26:22.446Z",
+  //   "consent": "true",
+  //   "campaignName": "Miss Hector Kassulke",
+  //   "channel": "input",
+  //   "campaignId": 76,
+  //   "id": "5"
+  // },
+  // {
+  //   "phoneNumber": "(605) 415-7027",
+  //   "createdDate": "2039-10-27T14:35:01.055Z",
+  //   "lastModified": "2022-02-21T13:06:57.048Z",
+  //   "consent": "false",
+  //   "campaignName": "Kate Oberbrunner II",
+  //   "channel": "input",
+  //   "campaignId": 90,
+  //   "id": "6"
+  // },
+  // {
+  //   "phoneNumber": "1-563-957-8977 x275",
+  //   "createdDate": "2030-07-01T23:23:46.375Z",
+  //   "lastModified": "2051-07-05T19:19:49.081Z",
+  //   "consent": "false",
+  //   "campaignName": "Herman McClure",
+  //   "channel": "navigate",
+  //   "campaignId": 54,
+  //   "id": "7"
+  // },
   // {
   //   "phoneNumber": "1-204-379-1395 x057",
   //   "createdDate": "2055-05-29T15:34:03.061Z",
@@ -291,6 +293,7 @@ const addListData = [
   //   "id": "29"
   // }
 ];
+
 export const consentReducer = (state = addListData, { type, payload }) => {
   switch (type)
   {
@@ -300,10 +303,10 @@ export const consentReducer = (state = addListData, { type, payload }) => {
       return addListData;
 
 
-    case ActionTypes.SET_CONSENT_LIST_ADD:
+    case ActionTypes.ADD_TO_CONSENT_LIST:
       //logic for add Consent
       state.push(ActionTypes.payload);
-      console.warn("Reducers", ActionTypes.SET_CONSENT_LIST_ADD);
+      console.warn("Reducers", ActionTypes.ADD_TO_CONSENT_LIST);
       return addListData;
 
 
