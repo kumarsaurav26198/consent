@@ -17,11 +17,24 @@ import { faEdit, faEye, faPlusCircle, faTrash } from "@fortawesome/free-solid-sv
 
 const ConsentMgrListEditComponent = () => {
 
-  // const result = useSelector(state => state.reducers.consentList);
-  // console.warn("redux store data in consentList", result);
+  const result = useSelector(state => state.consentList);
+  console.warn("redux store data in consentList", result);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  function sortCaret() {
+    return (
+      <span>
+        &nbsp;
+        <RiArrowUpSFill />
+        <span style={RiArrowDownSFillStyle}>
+          <RiArrowDownSFill />
+        </span>
+      </span>
+    );
+  };
+
 
   function priceFormatter(cell, row) {
     if (cell === "false")
@@ -76,58 +89,30 @@ const ConsentMgrListEditComponent = () => {
       hidden: true
     },
     {
-      dataField: "campaignId",
+      dataField: "id",
       text: "Customer ID",
       sort: true,
       headerAlign: "center",
       align: "start",
-      sortCaret: () => {
-        return (
-          <span>
-            &nbsp;
-            <RiArrowUpSFill />
-            <span style={RiArrowDownSFillStyle}>
-              <RiArrowDownSFill />
-            </span>
-          </span>
-        );
-      },
+      sortCaret: sortCaret
     },
     {
-      dataField: "createdDate",
+      dataField: "createdAt",
       text: "Created Date",
       sort: true,
       headerAlign: "center",
       align: "start",
-      sortCaret: () => {
-        return (
-          <span>
-            &nbsp;
-            <RiArrowUpSFill />
-            <span style={RiArrowDownSFillStyle}>
-              <RiArrowDownSFill />
-            </span>
-          </span>
-        );
-      },
+      sortCaret: sortCaret
+
     },
     {
-      dataField: "lastModified",
+      dataField: "updatedAt",
       text: "last Modified",
       sort: true,
       headerAlign: "center",
       align: "start",
-      sortCaret: () => {
-        return (
-          <span>
-            &nbsp;
-            <RiArrowUpSFill />
-            <span style={RiArrowDownSFillStyle}>
-              <RiArrowDownSFill />
-            </span>
-          </span>
-        );
-      },
+      sortCaret: sortCaret
+
     },
     {
       dataField: "phoneNumber",
@@ -137,14 +122,14 @@ const ConsentMgrListEditComponent = () => {
       align: "start",
     },
     {
-      dataField: "channel",
+      dataField: "description",
       text: "Channel",
       sort: false,
       headerAlign: "center",
       align: "start",
     },
     {
-      dataField: "campaignName",
+      dataField: "title",
       text: "CampaignName",
       sort: false,
       headerAlign: "center",
@@ -152,28 +137,30 @@ const ConsentMgrListEditComponent = () => {
 
     },
     {
-      dataField: "consent",
+      dataField: "published",
       text: "Consent",
       headerAlign: "center",
       align: "center",
+      // formatter: priceFormatter,
+
     },
     {
       dataField: "Action",
       text: "Action",
       headerAlign: "center",
       align: "center",
-      headerStyle: { width: 100 }
-
+      headerStyle: { width: 100 },
+      formatter: ActionFormatter,
     },
 
   ];
   return (
     <>
       <div className="card-holder">
-        <button onClick={() => dispatch(fetchConsent())}>fetch data</button>
+        {/* <button onClick={() => dispatch(fetchConsent())}>fetch data</button>
         <button onClick={() => dispatch(setProducts())}>Set Product</button>
         <button onClick={() => dispatch(deleteConsent())}>delete data</button>
-        <button onClick={() => dispatch(addConsent())}>add data</button>
+        <button onClick={() => dispatch(addConsent())}>add data</button> */}
         <button onClick={() => dispatch(fetchConsent())}>FETCH CONSENT LIST</button>
       </div>
       <div className="consentMgrtableList" >
@@ -192,13 +179,14 @@ const ConsentMgrListEditComponent = () => {
           <div className="fieldDisplayList tableDisplay">
             <BootstrapTable
               keyField="id"
-              data={[]}
+              data={result}
               columns={columns}
               hover
               condensed
-              // sort={{ dataField: "price", order: "asc" }}
+              sort={{ dataField: "price", order: "asc" }}
               rowStyle={rowStyle}
-              // pagination={paginationFactory([])}
+              pagination={paginationFactory([])}
+              filter={filterFactory()}
               noDataIndication="Table is Empty"
             />
           </div>
