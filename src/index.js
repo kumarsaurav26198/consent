@@ -4,16 +4,16 @@ import { Provider } from "react-redux";
 import { store } from "./app/store";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import "./index.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import "./css/main.css";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
 
 root.render(
   <Provider store={store}>
-    <App />
+    <div className="container">
+      <App />
+    </div>
   </Provider>
 );
 

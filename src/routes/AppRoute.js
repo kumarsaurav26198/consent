@@ -8,6 +8,8 @@ import {
   ConsentMgrListEditContainer,
   NotFount,
   Unauthorized,
+  Login,
+  Register
 } from "../pages";
 
 const AppRoute = () => {
@@ -15,8 +17,9 @@ const AppRoute = () => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<ConsentMgrListContainer />} />
-          <Route
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          {/* <Route
             path="/consentMgrListEditContainer"
             element={<ConsentMgrListEditContainer />}
           />
@@ -31,7 +34,7 @@ const AppRoute = () => {
           <Route
             path="/viewConsent"
             element={<ViewConsent />}
-          />
+          /> */}
           <Route path="/notFount" element={<NotFount />} />
           <Route path="/unauthorized" element={<Unauthorized />} />
         </Routes>
